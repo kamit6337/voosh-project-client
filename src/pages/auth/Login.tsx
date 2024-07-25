@@ -1,5 +1,5 @@
 import Box from "@/components/custom/Box";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +8,7 @@ import { postAuthReq } from "@/utils/api/authApi";
 import Toastify, { ToastContainer } from "@/lib/Toastify";
 import environment from "@/utils/environment";
 import Helmet from "react-helmet";
+import { useEffect } from "react";
 
 const schema = z.object({
   email: z.string().email("Invalid email address"),
@@ -16,6 +17,7 @@ const schema = z.object({
 
 const Login = () => {
   const navigate = useNavigate();
+  const errMsg = useSearchParams()[0].get("msg");
   const { showErrorMessage } = Toastify();
   const {
     register,
@@ -28,6 +30,12 @@ const Login = () => {
       password: "",
     },
   });
+
+  useEffect(() => {
+    if (errMsg) {
+      showErrorMessage({ message: errMsg });
+    }
+  }, [errMsg, showErrorMessage]);
 
   const onSubmit = async (values: z.infer<typeof schema>) => {
     try {
