@@ -102,7 +102,7 @@ const Home = () => {
           <NewTodo />
         </Dialog>
 
-        <div className="shadow-xl p-5 rounded-md flex flex-col gap-3 md:flex-row justify-between">
+        <div className="shadow-lg p-5 rounded-md flex flex-col gap-3 md:flex-row justify-between">
           <div className="flex items-center gap-2">
             <p className="w-16 text-my_black">Search:</p>
             <input
