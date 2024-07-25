@@ -44,8 +44,8 @@ const UpdateTodo = ({ id }: { id: string }) => {
       const findTodo = todos.find((todo: TODO) => todo._id === id);
 
       reset({
-        title: findTodo.title,
-        description: findTodo.description,
+        title: findTodo?.title,
+        description: findTodo?.description,
       });
     }
   }, [id, reset, todos]);

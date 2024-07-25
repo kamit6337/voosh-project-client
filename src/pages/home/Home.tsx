@@ -30,7 +30,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { showErrorMessage } = Toastify();
   const { todos } = useSelector(todosState);
-  const [searchTodos, setSearchTodos] = useState([]);
+  const [searchTodos, setSearchTodos] = useState<TODO[]>([]);
   const [searchInput, setSearchInput] = useState("");
 
   const [pendingTodos, inProgressTodos, doneTodos] = useMemo(() => {

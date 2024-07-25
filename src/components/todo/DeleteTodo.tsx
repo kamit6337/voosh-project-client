@@ -20,7 +20,7 @@ const DeleteTodo = ({ id }: { id: string }) => {
   const { showErrorMessage, showSuccessMessage } = Toastify();
 
   const todo = useMemo(() => {
-    if (!id || todos.length === 0) return {};
+    if (!id || todos.length === 0) return { title: "" };
     const findTodo = todos.find((todo: TODO) => todo._id === id);
     return findTodo;
   }, [todos, id]);
@@ -47,7 +47,7 @@ const DeleteTodo = ({ id }: { id: string }) => {
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
             Your want to delete your todo:{" "}
-            <span className="font-semibold">{todo.title}</span> <br />
+            <span className="font-semibold">{todo?.title}</span> <br />
             Once deleted cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>

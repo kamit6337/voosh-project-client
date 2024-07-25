@@ -8,7 +8,7 @@ const TodoDetails = ({ id }: { id: string }) => {
   const { todos } = useSelector(todosState);
 
   const todo = useMemo(() => {
-    if (!id || todos.length === 0) return {};
+    if (!id || todos.length === 0) return { title: "", description: "" };
     const findTodo = todos.find((todo: TODO) => todo._id === id);
     return findTodo;
   }, [todos, id]);
