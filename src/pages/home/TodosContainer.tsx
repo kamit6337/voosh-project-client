@@ -28,7 +28,10 @@ const TodosContainer = ({
   });
 
   return (
-    <div ref={drop} className="border border-my_gray rounded-md p-3 space-y-5">
+    <div
+      ref={drop}
+      className="todo_container border border-my_gray rounded-md p-3 space-y-5"
+    >
       <p className="bg-todo_header py-1 px-3 font-semibold text-my_white text-xl rounded uppercase ">
         {title}
       </p>
