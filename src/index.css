@@ -77,14 +77,15 @@
   * {
     @apply border-border m-0 p-0 box-border;
   }
+
   body {
-    @apply font-sans bg-background text-my_gray;
+    @apply font-sans bg-background text-foreground;
   }
 }
 
 @layer utilities {
   .input {
-    @apply border-2 border-gray-300 text-black w-full p-2;
+    @apply border-2 border-gray-300 text-my_black w-full p-2;
   }
 
   .btn_submit {

@@ -1,28 +1,31 @@
-import { DialogClose, DialogContent } from "./ui/dialog";
+import { DialogClose, DialogContent } from "../ui/dialog";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Toastify, { ToastContainer } from "@/lib/Toastify";
-import { postReq } from "@/utils/api/api";
+import { patchReq } from "@/utils/api/api";
 import Loading from "@/lib/Loading";
-import { useRef } from "react";
-import { useDispatch } from "react-redux";
-import { addSingleTodos } from "@/redux/slice/todoSlice";
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { todosState, updateTodo } from "@/redux/slice/todoSlice";
+import { TODO } from "@/types";
 
 const schema = z.object({
   title: z.string().min(1, "Please provide title"),
   description: z.string().min(1, "Please provide description"),
 });
 
-const NewTodo = () => {
+const UpdateTodo = ({ id }: { id: string }) => {
+  const { todos } = useSelector(todosState);
   const dispatch = useDispatch();
   const { showErrorMessage } = Toastify();
-  const closeBtnRef = useRef(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   const {
     register,
     handleSubmit,
     reset,
+    setFocus,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(schema),
@@ -32,11 +35,28 @@ const NewTodo = () => {
     },
   });
 
+  useEffect(() => {
+    setFocus("title");
+  }, [id, setFocus]);
+
+  useEffect(() => {
+    if (id || todos.length > 0) {
+      const findTodo = todos.find((todo: TODO) => todo._id === id);
+
+      reset({
+        title: findTodo.title,
+        description: findTodo.description,
+      });
+    }
+  }, [id, reset, todos]);
+
   const onSubmit = async (values: z.infer<typeof schema>) => {
     try {
-      const response = await postReq("/todos", values);
-      dispatch(addSingleTodos(response));
-      closeBtnRef?.current.click();
+      const data = { ...values, id };
+
+      const response = await patchReq("/todos", data);
+      dispatch(updateTodo(response));
+      closeBtnRef.current?.click();
       reset();
     } catch (error) {
       showErrorMessage({
@@ -56,7 +76,7 @@ const NewTodo = () => {
           className="h-full flex flex-col justify-between"
         >
           <div className="space-y-5">
-            <p className="text-lg font-semibold text-my_black">Add task</p>
+            <p className="text-lg font-semibold text-my_black">Edit task</p>
             <div className="flex flex-col gap-5">
               <div className="flex flex-col">
                 <label htmlFor="title" className="text-gray-400 ">
@@ -114,4 +134,4 @@ const NewTodo = () => {
   );
 };
 
-export default NewTodo;
+export default UpdateTodo;

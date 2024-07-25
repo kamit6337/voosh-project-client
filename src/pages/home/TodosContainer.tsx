@@ -16,17 +16,19 @@ const TodosContainer = ({ todos, title, parentId, moveChild, id }) => {
       <p className="bg-todo_header py-1 px-3 font-semibold text-my_white text-xl rounded uppercase ">
         {title}
       </p>
-      {todos.map((todo) => {
-        return (
-          <Todo
-            key={todo._id}
-            id={todo._id}
-            todo={todo}
-            parentId={parentId}
-            moveChild={moveChild}
-          />
-        );
-      })}
+      <div className="space-y-5 min-h-20">
+        {todos.map((todo) => {
+          return (
+            <Todo
+              key={todo._id}
+              id={todo._id}
+              todo={todo}
+              parentId={parentId}
+              moveChild={moveChild}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

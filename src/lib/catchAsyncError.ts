@@ -9,6 +9,8 @@ const catchAsyncError = <T extends unknown[], R>(func: AsyncFunction<T, R>) => {
     } catch (error: any) {
       if (error?.response?.data?.message) {
         throw new Error(error.response.data.message);
+      } else if (error?.request) {
+        throw new Error("Server is Down. Please try later");
       }
       throw error;
     }
