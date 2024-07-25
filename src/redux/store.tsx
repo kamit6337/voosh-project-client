@@ -11,3 +11,6 @@ export const store = configureStore({
     }),
   devTools: false,
 });
+
+// Define and export RootState type
+export type RootState = ReturnType<typeof store.getState>;

@@ -1,6 +1,8 @@
+import { TODO } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
-const initialState = {
+const initialState: { todos: TODO[] } = {
   todos: [],
 };
 
@@ -12,7 +14,7 @@ const todoSlice = createSlice({
       state.todos = payload.data;
       return state;
     },
-    addSingleTodos: (state, { payload }) => {
+    addSingleTodos: (state, { payload }: { payload: { data: TODO } }) => {
       state.todos = [payload.data, ...state.todos];
 
       return state;
@@ -20,7 +22,7 @@ const todoSlice = createSlice({
     updateTodo: (state, { payload }) => {
       const updatedTodo = payload.data;
 
-      state.todos = state.todos.map((todo) => {
+      state.todos = state.todos.map((todo: TODO) => {
         if (todo._id === updatedTodo._id) {
           return updatedTodo;
         }
@@ -30,7 +32,7 @@ const todoSlice = createSlice({
       return state;
     },
     deleteTodo: (state, { payload }) => {
-      state.todos = state.todos.filter((todo) => todo._id !== payload);
+      state.todos = state.todos.filter((todo: TODO) => todo._id !== payload);
 
       return state;
     },
@@ -38,7 +40,7 @@ const todoSlice = createSlice({
       if (payload === "updated") {
         const todosCopy = [...state.todos];
         todosCopy.sort(
-          (a, b) =>
+          (a: TODO, b: TODO) =>
             new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
         );
         state.todos = todosCopy;
@@ -48,7 +50,7 @@ const todoSlice = createSlice({
       if (payload === "created") {
         const todosCopy = [...state.todos];
         todosCopy.sort(
-          (a, b) =>
+          (a: TODO, b: TODO) =>
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
         state.todos = todosCopy;
@@ -57,7 +59,7 @@ const todoSlice = createSlice({
 
       if (payload === "name") {
         const todosCopy = [...state.todos];
-        todosCopy.sort((a, b) =>
+        todosCopy.sort((a: TODO, b: TODO) =>
           a.title.toLowerCase().localeCompare(b.title.toLowerCase())
         );
         state.todos = todosCopy;
@@ -79,4 +81,4 @@ export const {
 
 export const todoReducer = todoSlice.reducer;
 
-export const todosState = (state) => state.todo;
+export const todosState = (state: RootState) => state.todo;
