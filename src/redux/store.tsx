@@ -1,6 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-import environment from "../utils/environment";
 import { todoReducer } from "./slice/todoSlice";
 
 export const store = configureStore({
@@ -11,5 +9,5 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false, // Disable strict mode
     }),
-  devTools: environment.NODE_ENV === "production" ? false : true,
+  devTools: false,
 });
