@@ -1,17 +1,20 @@
+import { Routes, Route } from "react-router-dom";
 import RootLayout from "@/layout/RootLayout";
 import Login from "@/pages/auth/Login";
 import SignUp from "@/pages/auth/SignUp";
 import VerifySignUp from "@/pages/auth/VerifySignUp";
 import Home from "@/pages/home/Home";
-import { Route, Routes } from "react-router-dom";
+import AuthLayout from "@/layout/AuthLayout";
 
 const Router = () => {
   return (
     <Routes>
       {/* NOTE: AUTH ROUTES */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/signup/verify" element={<VerifySignUp />} />
+      <Route path="/" element={<AuthLayout />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signup/verify" element={<VerifySignUp />} />
+      </Route>
 
       {/* NOTE: ROOTLAYOUT */}
       <Route path="/" element={<RootLayout />}>

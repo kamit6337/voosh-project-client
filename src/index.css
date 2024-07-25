@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -29,6 +31,18 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --header-blue: #3b78ec;
+    --white: #ffffff;
+    --text-color: #dce8f9;
+    --my-black: #000000;
+    --my-red: #e8686e;
+    --todo-header: #569af5;
+    --todo-bg: #d7e7fe;
+    --delete-btn: #f36767;
+    --edit-btn: #5b99ee;
+    --detail-btn: #3677ee;
+    --cancel-btn: #cbd0d6;
+    --save-btn: #f1f2f4;
   }
 
   .dark {
@@ -64,6 +78,24 @@
     @apply border-border m-0 p-0 box-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply font-sans bg-background text-my_gray;
+  }
+}
+
+@layer utilities {
+  .input {
+    @apply border-2 border-gray-300 text-black w-full p-2;
+  }
+
+  .btn_submit {
+    @apply bg-header_blue h-12;
+  }
+
+  .input_error {
+    @apply text-xs text-red-500 mt-[2px];
+  }
+
+  .todo_btn {
+    @apply py-1 px-2 rounded-md;
   }
 }
