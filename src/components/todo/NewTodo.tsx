@@ -60,7 +60,7 @@ const NewTodo = () => {
             <p className="text-lg font-semibold text-my_black">Add task</p>
             <div className="flex flex-col gap-5">
               <div className="flex flex-col">
-                <label htmlFor="title" className="text-gray-400 ">
+                <label htmlFor="title" className="text-gray-500 ">
                   Title
                 </label>
                 <input
@@ -74,7 +74,7 @@ const NewTodo = () => {
                 )}
               </div>
               <div className="flex flex-col">
-                <label htmlFor="decription" className="text-my_black">
+                <label htmlFor="decription" className="text-gray-500 ">
                   Description
                 </label>
                 <textarea

@@ -6,6 +6,7 @@ import { postAuthReq } from "@/utils/api/authApi";
 import modifyEmail from "@/utils/javascript/modifyEmail";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Helmet from "react-helmet";
 
 const VerifySignUp = () => {
   const email = localStorage.getItem("email");
@@ -32,6 +33,13 @@ const VerifySignUp = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Verify</title>
+        <meta
+          name="discription"
+          content="Signup Verify page of Voosh project"
+        />
+      </Helmet>
       <Box title="Verify your email">
         <div className="text-center text-black">
           <p>Enter the 8 digit code you have received on</p>
@@ -41,7 +49,7 @@ const VerifySignUp = () => {
         <button
           disabled={isLoading}
           onClick={handleSubmit}
-          className="btn_submit"
+          className="btn_submit text-light_white"
         >
           {isLoading ? <Loading /> : "Verify"}
         </button>

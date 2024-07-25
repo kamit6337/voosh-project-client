@@ -1,14 +1,30 @@
 import { useDrop } from "react-dnd";
 import Todo from "./Todo";
+import { TODO } from "@/types";
 
 const ItemTypes = {
   CHILD: "child",
 };
 
-const TodosContainer = ({ todos, title, parentId, moveChild, id }) => {
+type Container = {
+  todos: TODO[];
+  title: string;
+  parentId: string;
+  id: string;
+  moveChild: (arg0: string, arg1: string, arg2: string) => void;
+};
+
+const TodosContainer = ({
+  todos,
+  title,
+  parentId,
+  moveChild,
+  id,
+}: Container) => {
   const [, drop] = useDrop({
     accept: ItemTypes.CHILD,
-    drop: (item) => moveChild(item.id, item.parentId, id),
+    drop: (item: { id: string; parentId: string }) =>
+      moveChild(item.id, item.parentId, id),
   });
 
   return (
@@ -24,7 +40,6 @@ const TodosContainer = ({ todos, title, parentId, moveChild, id }) => {
               id={todo._id}
               todo={todo}
               parentId={parentId}
-              moveChild={moveChild}
             />
           );
         })}

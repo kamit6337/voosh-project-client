@@ -5,3 +5,9 @@ export type TODO = {
   createdAt: Date;
   status: string;
 };
+
+export type Container = {
+  todos: TODO[];
+  id: string;
+  moveChild: (arg0: string, arg1: string, arg2: string) => void;
+};

@@ -20,11 +20,11 @@ const TodoDetails = ({ id }: { id: string }) => {
           <div className="space-y-5">
             <p className="text-lg font-semibold text-my_black">Task Details</p>
             <div className="flex flex-col gap-5">
-              <div className="flex ">
+              <div className="flex gap-2 ">
                 <p>Title:</p>
                 <p>{todo?.title}</p>
               </div>
-              <div className="flex ">
+              <div className="flex gap-2">
                 <p>Description:</p>
                 <p>{todo?.description}</p>
               </div>

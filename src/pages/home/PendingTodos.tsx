@@ -1,6 +1,7 @@
+import { Container } from "@/types";
 import TodosContainer from "./TodosContainer";
 
-const PendingTodos = ({ todos, id, moveChild }) => {
+const PendingTodos = ({ todos, id, moveChild }: Container) => {
   return (
     <TodosContainer
       title="todo"

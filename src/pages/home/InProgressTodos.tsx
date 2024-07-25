@@ -1,6 +1,9 @@
+import { Container } from "@/types";
 import TodosContainer from "./TodosContainer";
 
-const InProgressTodos = ({ todos, id, moveChild }) => {
+
+
+const InProgressTodos = ({ todos, id, moveChild }: Container) => {
   return (
     <>
       <TodosContainer

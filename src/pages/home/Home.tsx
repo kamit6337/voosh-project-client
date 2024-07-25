@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { TODO } from "@/types";
+import Helmet from "react-helmet";
 
 const PENDING = "pending";
 const PROGRESS = "progress";
@@ -87,17 +88,21 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Home</title>
+        <meta name="discription" content="Home page of Voosh project" />
+      </Helmet>
       <div className="px-5 py-10 space-y-5">
         <Dialog>
           <DialogTrigger asChild>
-            <button className="w-full bg-header_blue py-2 flex justify-center rounded-md">
+            <button className="w-full md:w-52 bg-dark_blue py-2 flex justify-center rounded-md text-light_white">
               Add Task
             </button>
           </DialogTrigger>
           <NewTodo />
         </Dialog>
 
-        <div className="shadow-lg p-5 rounded-md flex flex-col gap-3 md:flex-row justify-between">
+        <div className="shadow-xl p-5 rounded-md flex flex-col gap-3 md:flex-row justify-between">
           <div className="flex items-center gap-2">
             <p className="w-16 text-my_black">Search:</p>
             <input
@@ -115,9 +120,9 @@ const Home = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="updated">Recent Updated</SelectItem>
-                  <SelectItem value="created">Recent Created</SelectItem>
                   <SelectItem value="name">Name</SelectItem>
+                  <SelectItem value="created">Recent Created</SelectItem>
+                  <SelectItem value="updated">Recent Updated</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>

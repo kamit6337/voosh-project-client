@@ -8,6 +8,7 @@ import Toastify, { ToastContainer } from "@/lib/Toastify";
 import { postAuthReq } from "@/utils/api/authApi";
 import Loading from "@/lib/Loading";
 import environment from "@/utils/environment";
+import Helmet from "react-helmet";
 
 const schema = z
   .object({
@@ -76,6 +77,10 @@ const SignUp = () => {
 
   return (
     <>
+      <Helmet>
+        <title>SignUp</title>
+        <meta name="discription" content="Sign up page of Voosh project" />
+      </Helmet>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box title="Sign Up">
           <div>
@@ -130,18 +135,22 @@ const SignUp = () => {
               <p className="input_error">{errors.confirmPassword.message}</p>
             )}
           </div>
-          <button type="submit" className="btn_submit" disabled={isSubmitting}>
+          <button
+            type="submit"
+            className="btn_submit text-light_white"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? <Loading /> : "Signup"}
           </button>
           <div className="flex justify-center gap-2 font-semibold ">
             <p className="text-black">Already have an account?</p>
-            <Link to={`/login`} className="text-header_blue">
+            <Link to={`/login`} className="text-dark_blue">
               Login
             </Link>
           </div>
           <div className="flex justify-center">
             <div
-              className="bg-header_blue p-2 rounded-lg text-white cursor-pointer"
+              className="bg-dark_blue p-2 rounded-lg text-white cursor-pointer"
               onClick={googleOAuth}
             >
               Signup with{" "}

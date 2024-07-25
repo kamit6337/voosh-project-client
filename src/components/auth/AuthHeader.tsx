@@ -12,7 +12,7 @@ const AuthHeader = () => {
           to={`/login`}
           className={({ isActive }) =>
             isActive
-              ? "bg-my_gray p-2 px-3 rounded-lg text-header_blue font-semibold tracking-wide"
+              ? "bg-light_white p-2 px-3 rounded-lg text-dark_blue font-semibold tracking-wide"
               : ""
           }
         >
@@ -23,7 +23,7 @@ const AuthHeader = () => {
           end
           className={({ isActive }) =>
             isActive
-              ? "bg-my_gray p-2 px-3 rounded-lg text-header_blue font-semibold tracking-wide"
+              ? "bg-light_white p-2 px-3 rounded-lg text-dark_blue font-semibold tracking-wide"
               : ""
           }
         >

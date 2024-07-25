@@ -44,7 +44,7 @@ const RootLayout = () => {
 
   return (
     <>
-      <div className="h-16 w-full bg-header_blue">
+      <div className="h-16 w-full bg-dark_blue text-light_white">
         <Header />
       </div>
       <Outlet />

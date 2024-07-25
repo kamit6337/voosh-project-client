@@ -31,11 +31,11 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --header-blue: #3b78ec;
+    --dark-blue: #3b78ec;
     --white: #ffffff;
-    --text-color: #dce8f9;
-    --my-black: #000000;
-    --my-red: #e8686e;
+    --ligit-white: #dce8f9;
+    --black: #000000;
+    --light-red: #e8686e;
     --todo-header: #569af5;
     --todo-bg: #d7e7fe;
     --delete-btn: #f36767;
@@ -89,7 +89,7 @@
   }
 
   .btn_submit {
-    @apply bg-header_blue h-12;
+    @apply bg-dark_blue h-12;
   }
 
   .input_error {

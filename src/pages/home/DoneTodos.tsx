@@ -1,6 +1,7 @@
+import { Container } from "@/types";
 import TodosContainer from "./TodosContainer";
 
-const DoneTodos = ({ todos, id, moveChild }) => {
+const DoneTodos = ({ todos, id, moveChild }: Container) => {
   return (
     <>
       <TodosContainer
