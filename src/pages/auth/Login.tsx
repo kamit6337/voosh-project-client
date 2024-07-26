@@ -100,14 +100,18 @@ const Login = () => {
               <p className="input_error">{errors.password?.message}</p>
             )}
           </div>
-          <button
-            className="btn_submit text-light_white"
-            disabled={isSubmitting}
-            type="submit"
-          >
-            {isSubmitting ? <Loading /> : "Login"}
-          </button>
-
+          <div className="flex flex-col gap-2">
+            <button
+              className="btn_submit text-light_white"
+              disabled={isSubmitting}
+              type="submit"
+            >
+              {isSubmitting ? <Loading /> : "Login"}
+            </button>
+            <p className="self-end text-dark_blue text-sm">
+              <Link to={`/forgotPassword`}>Forgot Password</Link>
+            </p>
+          </div>
           <div className="flex justify-center gap-2 font-semibold ">
             <p className="text-black">Dont't have an account?</p>
             <Link to={`/signup`} className="text-dark_blue">

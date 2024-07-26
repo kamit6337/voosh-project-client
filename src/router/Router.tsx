@@ -5,6 +5,8 @@ import SignUp from "@/pages/auth/SignUp";
 import VerifySignUp from "@/pages/auth/VerifySignUp";
 import Home from "@/pages/home/Home";
 import AuthLayout from "@/layout/AuthLayout";
+import ForgotPassword from "@/pages/auth/ForgotPassword";
+import NewPassword from "@/pages/auth/NewPassword";
 
 const Router = () => {
   return (
@@ -14,6 +16,8 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signup/verify" element={<VerifySignUp />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/newPassword" element={<NewPassword />} />
       </Route>
 
       {/* NOTE: ROOTLAYOUT */}

@@ -32,7 +32,7 @@ const Toastify = (): ToastifyFunctions => {
 
   const showSuccessMessage = ({
     message,
-    time = 1000,
+    time = 2000,
     position = "top-right",
   }: CustomToastOptions) => {
     toast.success(message, {
