@@ -16,7 +16,7 @@ const schema = z.object({
 
 const NewTodo = () => {
   const dispatch = useDispatch();
-  const { showErrorMessage } = Toastify();
+  const { showErrorMessage, showSuccessMessage } = Toastify();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   const {
@@ -36,6 +36,8 @@ const NewTodo = () => {
     try {
       const response = await postReq("/todos", values);
       dispatch(addSingleTodos(response));
+
+      showSuccessMessage({ message: "Successfully created new Todo" });
 
       closeBtnRef.current?.click();
       reset();

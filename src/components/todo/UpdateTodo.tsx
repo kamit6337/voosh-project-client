@@ -18,7 +18,7 @@ const schema = z.object({
 const UpdateTodo = ({ id }: { id: string }) => {
   const { todos } = useSelector(todosState);
   const dispatch = useDispatch();
-  const { showErrorMessage } = Toastify();
+  const { showErrorMessage, showSuccessMessage } = Toastify();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   const {
@@ -53,9 +53,11 @@ const UpdateTodo = ({ id }: { id: string }) => {
   const onSubmit = async (values: z.infer<typeof schema>) => {
     try {
       const data = { ...values, id };
-
       const response = await patchReq("/todos", data);
       dispatch(updateTodo(response));
+
+      showSuccessMessage({ message: "Successfully updated Todo" });
+
       closeBtnRef.current?.click();
       reset();
     } catch (error) {

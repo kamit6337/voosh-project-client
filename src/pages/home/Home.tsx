@@ -28,7 +28,7 @@ const DONE = "done";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { showErrorMessage } = Toastify();
+  const { showErrorMessage, showSuccessMessage } = Toastify();
   const { todos } = useSelector(todosState);
   const [searchTodos, setSearchTodos] = useState<TODO[]>([]);
   const [searchInput, setSearchInput] = useState("");
@@ -74,6 +74,8 @@ const Home = () => {
         id: childId,
         status: toParentId,
       });
+
+      showSuccessMessage({ message: "Successfully update Todo" });
 
       dispatch(updateTodo(response));
     } catch (error) {
