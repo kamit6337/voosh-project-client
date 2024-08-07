@@ -25,7 +25,6 @@ const UpdateTodo = ({ id }: { id: string }) => {
     register,
     handleSubmit,
     reset,
-    setFocus,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(schema),
@@ -36,11 +35,7 @@ const UpdateTodo = ({ id }: { id: string }) => {
   });
 
   useEffect(() => {
-    setFocus("title");
-  }, [id, setFocus]);
-
-  useEffect(() => {
-    if (id || todos.length > 0) {
+    if (id && todos.length > 0) {
       const findTodo = todos.find((todo: TODO) => todo._id === id);
 
       reset({
@@ -55,9 +50,7 @@ const UpdateTodo = ({ id }: { id: string }) => {
       const data = { ...values, id };
       const response = await patchReq("/todos", data);
       dispatch(updateTodo(response));
-
       showSuccessMessage({ message: "Successfully updated Todo" });
-
       closeBtnRef.current?.click();
       reset();
     } catch (error) {
@@ -114,17 +107,14 @@ const UpdateTodo = ({ id }: { id: string }) => {
 
           <div className="flex justify-end items-end gap-3 text-my_black">
             <button
-              className="bg-save_btn px-4 py-2 rounded-md"
+              className="todo_save_btn"
               disabled={isSubmitting}
               type="submit"
             >
               {isSubmitting ? <Loading /> : "Save"}
             </button>
             <DialogClose asChild>
-              <button
-                className="bg-cancel_btn px-4 py-2 rounded-md"
-                ref={closeBtnRef}
-              >
+              <button className="todo_cancel_btn" ref={closeBtnRef}>
                 Close
               </button>
             </DialogClose>

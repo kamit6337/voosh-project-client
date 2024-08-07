@@ -33,9 +33,7 @@ const TodoDetails = ({ id }: { id: string }) => {
 
           <div className="flex justify-end items-end gap-3 text-my_black">
             <DialogClose asChild>
-              <button className="bg-cancel_btn px-4 py-2 rounded-md">
-                Close
-              </button>
+              <button className="todo_cancel_btn">Close</button>
             </DialogClose>
           </div>
         </form>

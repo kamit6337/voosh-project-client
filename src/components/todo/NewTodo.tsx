@@ -95,17 +95,14 @@ const NewTodo = () => {
 
           <div className="flex justify-end items-end gap-3 text-my_black">
             <button
-              className="bg-save_btn px-4 py-2 rounded-md"
+              className="todo_save_btn"
               disabled={isSubmitting}
               type="submit"
             >
               {isSubmitting ? <Loading /> : "Save"}
             </button>
             <DialogClose asChild>
-              <button
-                className="bg-cancel_btn px-4 py-2 rounded-md"
-                ref={closeBtnRef}
-              >
+              <button className="todo_cancel_btn" ref={closeBtnRef}>
                 Close
               </button>
             </DialogClose>

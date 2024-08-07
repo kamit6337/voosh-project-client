@@ -35,10 +35,12 @@ const Login = () => {
     if (errMsg) {
       showErrorMessage({ message: errMsg });
     }
-  }, [errMsg, showErrorMessage]);
+  }, []);
 
   const onSubmit = async (values: z.infer<typeof schema>) => {
     try {
+      console.log(values);
+
       await postAuthReq("/login", values);
       navigate("/");
     } catch (error) {

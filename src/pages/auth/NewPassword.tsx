@@ -15,7 +15,7 @@ const schema = z
     confirmPassword: z.string().min(1, "Confirm password is required"),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
+    message: "Password don't match",
     path: ["confirmPassword"], // Set the path of the error
   });
 
