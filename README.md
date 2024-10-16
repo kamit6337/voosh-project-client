@@ -44,7 +44,6 @@ This is a Todos making website where you can create, update and delete Todos. As
 
 - fork this project into your own Github repo
 - create a .env file below index.html file
-- vercel.json file is added for deployment in Vercel. If your want to deploy to other then delete it.
 
 <h4>.env Variables</h4>
 
