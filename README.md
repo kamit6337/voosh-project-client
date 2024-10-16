@@ -1,7 +1,7 @@
 # Voosh Project
 
 This is a assignment project from Voosh Food Technology   
-You can visit the [Live website](https://voosh-project-client.vercel.app/)  
+You can visit the [Live website](https://voosh-project-client.onrender.com)  
 
 ## Table of Contents
 
@@ -10,6 +10,7 @@ You can visit the [Live website](https://voosh-project-client.vercel.app/)
 - [Tech](#tech)
 - [Setup](#setup)
 - [Screenshots](#screenshots)
+- [Running](#running)
 
 ## Description
 
@@ -50,8 +51,6 @@ This is a Todos making website where you can create, update and delete Todos. As
 
 - VITE_APP_SERVER_URL=(this-project-server url) For More info : [Server](https://github.com/Kamit6337/voosh-project-server)
 - VITE_APP_NODE_ENV=(type "production" on deployed website, for local pc type "development")
-- VITE_APP_GT4_MEASUREMENT_ID=(in case you want to add Google Analytics. Get your Measurement ID from [Google Analytics](https://google.com/analytics) after deploy your frontend website because you will need deployed url.
-
 
 
 
@@ -64,3 +63,21 @@ Here are the screenshots of this project.
 ![project1](https://amit-general-bucket.s3.ap-south-1.amazonaws.com/images/voosh2.png)
 ![project1](https://amit-general-bucket.s3.ap-south-1.amazonaws.com/images/voosh3.png)
 ![project1](https://amit-general-bucket.s3.ap-south-1.amazonaws.com/images/voosh4.png)
+
+
+## Running
+
+To run this app locally using Docker Image :
+
+- install Docker Desktop from [Docker website](https://www.docker.com/products/docker-desktop) and start to run in background
+- create a folder in desktop, open this folder in VS Code
+- create a .env file
+- copy .env.example file variables from above and paste in .env file
+- start filling all environment variables
+- open VS Code terminal
+
+```
+docker run --env-file .env -p 5173:80 kamit6337/voosh-project-client
+```
+
+- react-app started on http://localhost:5173
