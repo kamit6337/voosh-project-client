@@ -55,12 +55,12 @@ const Todo = ({ todo, id, parentId }: Todo) => {
           <p>{description}</p>
         </div>
         {status !== DONE && (
-          <div className="w-[88px] text-xs text-red-500">
+          <div className="w-24 text-sm text-red-500">
             <p>{remainTime}</p>
           </div>
         )}
       </div>
-      <p className="-mb-10 text-sm">Created at: {formatUTCDate(createdAt)}</p>
+      <p className="-mb-10 text-xs">Created at: {formatUTCDate(createdAt)}</p>
       <div className="text-sm text-my_white gap-1 flex justify-end items-end">
         <AlertDialog>
           <AlertDialogTrigger>

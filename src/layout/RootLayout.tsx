@@ -3,7 +3,8 @@ import useGetAllTodos from "@/hooks/useGetAllTodos";
 import useLoginCheck from "@/hooks/useLoginCheck";
 import Loading from "@/lib/Loading";
 import { addAllTodos } from "@/redux/slice/todoSlice";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -11,12 +12,31 @@ const RootLayout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading, error, isSuccess } = useLoginCheck();
+  const [loadingTime, setLoadingTime] = useState(60);
 
   const {
     isLoading: getTodosIsLoading,
     error: getTodosError,
     data,
   } = useGetAllTodos(isSuccess);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | undefined;
+
+    // Start the loading timer only when either isLoading or getTodosIsLoading is true
+    if (isLoading || getTodosIsLoading) {
+      if (loadingTime === 0) return;
+
+      interval = setInterval(() => {
+        setLoadingTime((prev) => prev - 1);
+      }, 1000);
+    }
+
+    // Clear the interval when loading finishes or component unmounts
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isLoading, getTodosIsLoading, loadingTime]);
 
   useEffect(() => {
     if (data) {
@@ -37,7 +57,12 @@ const RootLayout = () => {
   }, [error, navigate, getTodosError]);
 
   if (isLoading || getTodosIsLoading) {
-    return <Loading hScreen={true} small={false} />;
+    return (
+      <div className="h-screen w-full flex flex-col justify-center items-center">
+        <Loading hScreen={false} small={false} />
+        <p>{loadingTime} seconds remaining</p>
+      </div>
+    );
   }
 
   if (!isSuccess) return;

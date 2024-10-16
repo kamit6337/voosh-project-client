@@ -1,4 +1,6 @@
-const formatUTCDate = (utcDate: Date): string => {
+const formatUTCDate = (utcDate: Date | undefined): string => {
+  if (!utcDate) return "";
+
   const dateObj = new Date(utcDate);
 
   // Extract date components
