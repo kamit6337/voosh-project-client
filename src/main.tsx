@@ -8,14 +8,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.tsx";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
-import ReactGA from "react-ga4";
 import environment from "./utils/environment.ts";
 
 const PRODUCTION = "production";
-
-if (environment.GT4_MEASUREMENT_ID) {
-  ReactGA.initialize(environment.GT4_MEASUREMENT_ID);
-}
 
 if (environment.NODE_ENV === PRODUCTION) disableReactDevTools();
 

@@ -5,10 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Toastify, { ToastContainer } from "@/lib/Toastify";
 import { patchReq } from "@/utils/api/api";
 import Loading from "@/lib/Loading";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { todosState, updateTodo } from "@/redux/slice/todoSlice";
 import { TODO } from "@/types";
+import DateAndTimePicker from "./DateAndTimePicker";
+import { formatISO } from "date-fns";
 
 const schema = z.object({
   title: z.string().min(1, "Please provide title"),
@@ -18,8 +20,9 @@ const schema = z.object({
 const UpdateTodo = ({ id }: { id: string }) => {
   const { todos } = useSelector(todosState);
   const dispatch = useDispatch();
-  const { showErrorMessage, showSuccessMessage } = Toastify();
+  const { showErrorMessage } = Toastify();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const [dueDate, setDueDate] = useState(new Date());
 
   const {
     register,
@@ -42,15 +45,16 @@ const UpdateTodo = ({ id }: { id: string }) => {
         title: findTodo?.title,
         description: findTodo?.description,
       });
+      setDueDate(new Date(findTodo?.dueDate as Date) || new Date());
     }
   }, [id, reset, todos]);
 
   const onSubmit = async (values: z.infer<typeof schema>) => {
     try {
-      const data = { ...values, id };
-      const response = await patchReq("/todos", data);
+      const formattedDueDate = formatISO(dueDate);
+      const dataToSend = { ...values, id, dueDate: formattedDueDate };
+      const response = await patchReq("/todos", dataToSend);
       dispatch(updateTodo(response));
-      showSuccessMessage({ message: "Successfully updated Todo" });
       closeBtnRef.current?.click();
       reset();
     } catch (error) {
@@ -103,6 +107,12 @@ const UpdateTodo = ({ id }: { id: string }) => {
                 )}
               </div>
             </div>
+            <DateAndTimePicker
+              currentDate={dueDate}
+              handleDateChange={(date: Date | null) =>
+                date ? setDueDate(date) : null
+              }
+            />
           </div>
 
           <div className="flex justify-end items-end gap-3 text-my_black">

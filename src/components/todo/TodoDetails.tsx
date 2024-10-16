@@ -3,12 +3,15 @@ import { DialogClose, DialogContent } from "../ui/dialog";
 import { todosState } from "@/redux/slice/todoSlice";
 import { useMemo } from "react";
 import { TODO } from "@/types";
+import timeDifferenceFromNow from "@/utils/javascript/timeDifferenceFromNow";
+import formatUTCDate from "@/utils/javascript/formatUTCDate";
+
+const DONE = "done";
 
 const TodoDetails = ({ id }: { id: string }) => {
   const { todos } = useSelector(todosState);
 
   const todo = useMemo(() => {
-    if (!id || todos.length === 0) return { title: "", description: "" };
     const findTodo = todos.find((todo: TODO) => todo._id === id);
     return findTodo;
   }, [todos, id]);
@@ -28,6 +31,17 @@ const TodoDetails = ({ id }: { id: string }) => {
                 <p>Description:</p>
                 <p>{todo?.description}</p>
               </div>
+              {todo?.status === DONE ? (
+                <div className="flex gap-2 text-sm text-red-400">
+                  <p>Completion time:</p>
+                  <p>{formatUTCDate(todo?.dueDate)}</p>
+                </div>
+              ) : (
+                <div className="flex gap-2 text-sm text-red-400">
+                  <p>Due Date:</p>
+                  <p>{timeDifferenceFromNow(todo?.dueDate)}</p>
+                </div>
+              )}
             </div>
           </div>
 

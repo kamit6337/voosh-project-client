@@ -5,9 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Toastify, { ToastContainer } from "@/lib/Toastify";
 import { postReq } from "@/utils/api/api";
 import Loading from "@/lib/Loading";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addSingleTodos } from "@/redux/slice/todoSlice";
+import DateAndTimePicker from "./DateAndTimePicker";
+import { formatISO } from "date-fns";
 
 const schema = z.object({
   title: z.string().min(1, "Please provide title"),
@@ -16,8 +18,9 @@ const schema = z.object({
 
 const NewTodo = () => {
   const dispatch = useDispatch();
-  const { showErrorMessage, showSuccessMessage } = Toastify();
+  const { showErrorMessage } = Toastify();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const [dueDate, setDueDate] = useState(new Date());
 
   const {
     register,
@@ -34,10 +37,12 @@ const NewTodo = () => {
 
   const onSubmit = async (values: z.infer<typeof schema>) => {
     try {
-      const response = await postReq("/todos", values);
-      dispatch(addSingleTodos(response));
+      const formattedDueDate = formatISO(dueDate);
 
-      showSuccessMessage({ message: "Successfully created new Todo" });
+      const dataToSend = { ...values, dueDate: formattedDueDate };
+
+      const response = await postReq("/todos", dataToSend);
+      dispatch(addSingleTodos(response));
 
       closeBtnRef.current?.click();
       reset();
@@ -91,6 +96,12 @@ const NewTodo = () => {
                 )}
               </div>
             </div>
+            <DateAndTimePicker
+              currentDate={dueDate}
+              handleDateChange={(date: Date | null) =>
+                date ? setDueDate(date) : null
+              }
+            />
           </div>
 
           <div className="flex justify-end items-end gap-3 text-my_black">

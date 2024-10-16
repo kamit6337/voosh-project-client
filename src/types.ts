@@ -2,6 +2,7 @@ export type TODO = {
   _id: string;
   title: string;
   description: string;
+  dueDate: Date;
   status: string;
   createdAt: Date;
   updatedAt: Date;
